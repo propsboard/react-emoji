@@ -22,9 +22,10 @@ let ReactEmoji = () => {
       path: options.path || '',
       ext: options.ext || 'svg',
       singleEmoji: options.singleEmoji || false,
-      strict: options.strict || false
+      strict: options.strict || false,
+      size: options.size || '20px'
     };
-    hash.attributes = assign({width: '20px', height: '20px'}, options.attributes);
+    hash.attributes = assign({width: hash.size, height: hash.size}, options.attributes);
     return hash;
   };
 

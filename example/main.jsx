@@ -17,6 +17,7 @@ let App = React.createClass({
     return (
       <div>
         <div>{ this.emojify(this.props.text) }</div>
+        <div>{ this.emojify(this.props.text, {size: '40px' }) }</div>
         <div>{ this.emojify(this.props.text, {emojiType: 'emojione'}) }</div>
         <div>{ this.emojify(this.props.text, {useEmoticon: false}) }</div>
       </div>
