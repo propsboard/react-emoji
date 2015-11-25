@@ -5,7 +5,7 @@ import ReactEmojiMixin from '../src/react-emoji';
 let App = React.createClass({
   getDefaultProps() {
     return {
-      text: "hi I'm happy :smile: :100: :+1: :) http://yahoo.co.jp :arrow_double_down:"
+      text: "hi I'm happy :smile: :100: :+1: http://yahoo.co.jp :arrow_double_down: hey yo :props: yal"
     };
   },
 

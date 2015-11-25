@@ -5,6 +5,8 @@ import escapeStringRegexp from 'escape-string-regexp';
 import assign             from 'object-assign';
 import compact            from 'lodash.compact';
 
+annotations['props'] = 'adsdsdd';
+
 let ReactEmoji = () => {
   let getEscapedKeys = (hash) => {
     return Object.keys(hash)
@@ -77,9 +79,20 @@ let ReactEmoji = () => {
     let { delimiter, dict } = options.useEmoticon ? emojiWithEmoticons : emojiWithoutEmoticons;
     return compact(
       text.split(delimiter).map(function(word, index) {
+
+        // console.log('HEY WORD', delimiter, word);
         let match = word.match(delimiter);
         if (!!options.strict && word !== '' && match === null) throw new Error(`Could not find emoji: ${word}.`);
-        if (match) {
+        if (word === ':props:'){
+          return React.createElement(
+            'img',
+            assign(options.attributes, {
+              key: index,
+              src: 'https://s3.amazonaws.com/props-media/emoji/props_72.png'
+            })
+          );
+        }
+        else if (match) {
           let hex = dict[getKey(match[0])];
           if (hex === null) return word;
           return React.createElement(
@@ -88,8 +101,9 @@ let ReactEmoji = () => {
               key: index,
               src: buildImageUrl(hex, options)
             })
-          );
+          ); 
         } else {
+
           return word;
         }
       })
