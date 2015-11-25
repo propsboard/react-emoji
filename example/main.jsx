@@ -14,9 +14,13 @@ let App = React.createClass({
   ],
 
   render() {
+
+    var urlReplacement = 'Here is a custom emoji! :URL|https://propsboard.slack.com/emoji/metal/9f936a4278.png|URL:'
+
     return (
       <div>
         <div>{ this.emojify(this.props.text) }</div>
+        <div>{ this.emojify(urlReplacement) }</div>
         <div>{ this.emojify(this.props.text, {size: '40px' }) }</div>
         <div>{ this.emojify(this.props.text, {emojiType: 'emojione'}) }</div>
         <div>{ this.emojify(this.props.text, {useEmoticon: false}) }</div>

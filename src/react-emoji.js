@@ -32,16 +32,15 @@ let ReactEmoji = () => {
   // Use negated lookahead for `:/`, refs: https://github.com/banyan/react-emoji/issues/1
   let specialEmoticons = {':/': '1f615'};
   let specialEmoticonsRegex = "\\:\\/(?!\\/)";
-  let fullAnnotations = annotations;
-  fullAnnotations['props'] = 'adsdsdd';
+  let urlSuppliedRegex = "\\:URL\\|.*\\|URL\\:"
 
   const emojiWithEmoticons = {
-    delimiter: new RegExp(`(:(?:${getEscapedKeys(fullAnnotations)}):|${getEscapedKeys(emoticons)}|${specialEmoticonsRegex})`, 'g'),
+    delimiter: new RegExp(`(:(?:${getEscapedKeys(annotations)}):|${getEscapedKeys(emoticons)}|${specialEmoticonsRegex}|${urlSuppliedRegex})`, 'g'),
     dict: assign(annotations, emoticons, specialEmoticons)
   };
 
   const emojiWithoutEmoticons = {
-    delimiter: new RegExp(`(:(?:${getEscapedKeys(fullAnnotations)}):)`, 'g'),
+    delimiter: new RegExp(`(:(?:${getEscapedKeys(annotations)}):)`, 'g'),
     dict: annotations
   };
 
@@ -94,6 +93,15 @@ let ReactEmoji = () => {
               src: 'https://s3.amazonaws.com/props-media/emoji/props_72.png'
             })
           );
+        }
+        else if(word.indexOf(':URL|') >-1 && word.indexOf('|URL:') >-1){
+         return React.createElement(
+            'img',
+            assign(options.attributes, {
+              key: index,
+              src: word.replace(':URL|', '').replace('|URL:', '')
+            })
+          ); 
         }
         else if (match) {
           let hex = dict[getKey(match[0])];
