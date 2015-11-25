@@ -5,7 +5,7 @@ import escapeStringRegexp from 'escape-string-regexp';
 import assign             from 'object-assign';
 import compact            from 'lodash.compact';
 
-annotations['props'] = 'adsdsdd';
+
 
 let ReactEmoji = () => {
   let getEscapedKeys = (hash) => {
@@ -31,14 +31,16 @@ let ReactEmoji = () => {
   // Use negated lookahead for `:/`, refs: https://github.com/banyan/react-emoji/issues/1
   let specialEmoticons = {':/': '1f615'};
   let specialEmoticonsRegex = "\\:\\/(?!\\/)";
+  let fullAnnotations = annotations;
+  fullAnnotations['props'] = 'adsdsdd';
 
   const emojiWithEmoticons = {
-    delimiter: new RegExp(`(:(?:${getEscapedKeys(annotations)}):|${getEscapedKeys(emoticons)}|${specialEmoticonsRegex})`, 'g'),
+    delimiter: new RegExp(`(:(?:${getEscapedKeys(fullAnnotations)}):|${getEscapedKeys(emoticons)}|${specialEmoticonsRegex})`, 'g'),
     dict: assign(annotations, emoticons, specialEmoticons)
   };
 
   const emojiWithoutEmoticons = {
-    delimiter: new RegExp(`(:(?:${getEscapedKeys(annotations)}):)`, 'g'),
+    delimiter: new RegExp(`(:(?:${getEscapedKeys(fullAnnotations)}):)`, 'g'),
     dict: annotations
   };
 
